@@ -1,10 +1,10 @@
-# Bài tập lớn môn học "Nhập môn học máy và khai phá dữ liệu"
+# Bài tập lớn môn học *Nhập môn học máy và khai phá dữ liệu*
 ## Đề tài: Phân loại ảnh do AI tạo và ảnh thật
 ## Phương pháp thực hiện
 ### Mô hình
-Kiến trúc: Vision Transformer (ViT) trong bài báo [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)
+Kiến trúc: Vision Transformer (ViT) đề xuất trong bài báo [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)
 ### Dữ liệu:
-Ảnh được thu thập gồm hai loại: ảnh do AI tạo và ảnh thật, gồm các đối tượng: Car, Tree, Bird, Aquatic, Ship, Airplane, Dog, Cat, Flower.
+Ảnh được thu thập gồm hai loại: ảnh do AI tạo và ảnh thật, gồm các đối tượng: Ship, Aquatic, Airplane, Tree, Car, Bird, Flower, Dog, Cat.
 - Ảnh do AI tạo: được các thành viên trong nhóm tạo ra bằng cách sử dụng mô hình tạo sinh mã nguồn mở trên Huggingface Hub, tận dụng GPU của Google Colab để tăng tốc độ tạo ảnh.
 
 ![alt text](img/fake.png)
@@ -13,9 +13,9 @@ Kiến trúc: Vision Transformer (ViT) trong bài báo [An Image is Worth 16x16 
 
 ![alt text](img/real.png)
 
-Số lượng: mỗi loại đối tượng có khoảng 900 ảnh thật và 900 ảnh do AI tạo. Tổng khoảng 15000 ảnh.
+**Số lượng**: mỗi loại đối tượng có khoảng 800 ảnh thật và 800 ảnh do AI tạo. Tổng khoảng 15000 ảnh.
 ### Tiền xử lý dữ liệu
-Ảnh sau khi thu thập được lọc để loại bỏ những ảnh nhiễu và có độ tương đồng cao sử dụng thư viện [fastdup](https://github.com/visual-layer/fastdup)
+Ảnh sau khi thu thập được lọc để loại bỏ những ảnh nhiễu và những ảnh có độ tương đồng cao sử dụng thư viện [fastdup](https://github.com/visual-layer/fastdup)
 
 ![alt text](img/dedup.png)
 
@@ -29,14 +29,13 @@ Sau khi tiền xử lý, còn 9306 ảnh, trong đó 5118 ảnh thật và 4188 
 Dữ liệu được chia thành 2 tập train và test theo tỉ lệ 80-20.
 
 Tham số huấn luyện:
-- learning_rate: 5e-5
-- train_batch_size: 128
-- eval_batch_size: 128
+- learning_rate: 5e-5/2e-4
+- train_batch_size: 128/32
 - seed: 42
 - optimizer: Adam with betas=(0.9,0.999) and epsilon=1e-08
 - lr_scheduler_type: linear
 - lr_scheduler_warmup_ratio: 0.1
-- num_epochs: 10
+- num_epochs: 10/5
 
 ## Kết quả
 [<img src="https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-28.svg" alt="Visualize in Weights & Biases" width="200" height="32"/>](https://wandb.ai/date3k2/real-fake-classification)
@@ -65,9 +64,13 @@ Kết quả tốt nhất trên tập test:
 Hàm loss:  
 ![alt text](img/loss.png)
 
+Accuracy:
+
+![alt text](img/accuracy.png)
+
 Các model được upload lên Huggingface Hub [tại đây](https://huggingface.co/collections/date3k2/vit-665ec6ff045fcbf12bbbbe1d)
 
-Link demo [tại đây](https://huggingface.co/spaces/date3k2/vit-real-fake-classification-v2)
+**[Demo](https://huggingface.co/spaces/date3k2/vit-real-fake-classification-v2)**
 
 ### Thư viện sử dụng
 - Transformers, Pytorch, Accelerate, Tokenizers: load mô hình và huấn luyện
