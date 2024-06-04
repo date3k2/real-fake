@@ -65,9 +65,9 @@ Kết quả tốt nhất trên tập test:
 Hàm loss:  
 ![alt text](img/loss.png)
 
-Model được upload lên Huggingface Hub [tại đây](https://huggingface.co/date3k2/real-fake-classification)
+Các model được upload lên Huggingface Hub [tại đây](https://huggingface.co/collections/date3k2/vit-665ec6ff045fcbf12bbbbe1d)
 
-Link demo [tại đây](https://huggingface.co/date3k2/real-fake-classification)
+Link demo [tại đây](https://huggingface.co/spaces/date3k2/vit-real-fake-classification-v2)
 
 ### Thư viện sử dụng
 - Transformers, Pytorch, Accelerate, Tokenizers: load mô hình và huấn luyện
